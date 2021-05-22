@@ -1,6 +1,6 @@
 from flask import Flask,Response
 from flaskext.mysql import MySQL
-import yaml
+import json
 import os
 
 app = Flask(__name__)
@@ -44,7 +44,7 @@ def hello():
         }
       }
     }
-    response = yaml.dump(traefik_config)
+    response = json.dump(traefik_config)
         
     return Response(response, mimetype='text/yaml')
   except Exception as e:
