@@ -10,7 +10,7 @@ app.config['MYSQL_DATABASE_USER'] = os.environ.get("MYSQL_DATABASE_USER", defaul
 app.config['MYSQL_DATABASE_PASSWORD'] = os.environ.get("MYSQL_DATABASE_PASSWORD", default='mailcow')
 app.config['MYSQL_DATABASE_PORT'] = os.environ.get("MYSQL_DATABASE_PORT", default=3306)
 app.config['MYSQL_DATABASE_DB'] = os.environ.get("MYSQL_DATABASE_DB", default='mailcow')
-app.config['MYSQL_DATABASE_HOST'] = os.environ.get("MYSQL_DATABASE_HOST", default='localhost')
+app.config['MYSQL_DATABASE_HOST'] = os.environ.get("MYSQL_DATABASE_HOST", default='mysql-mailcow')
 
 TRAEFIK_ROUTER = os.environ.get("TRAEFIK_ROUTER", default="nginx-mailcow-secure")
 
@@ -26,7 +26,7 @@ def hello():
     tls_domains = []
 
     for row in rows:
-      subdomains = ["main", "imap", "smtp", "pop3", "autodiscover", "autoconfig", "webmail", "email", "mailtest"]
+      subdomains = ["mail", "imap", "smtp", "pop3", "autodiscover", "autoconfig", "webmail", "email"]
       domains = [ domain + "." + row[0] for domain in subdomains]
       tls_domains += [ { 'main' : "mail." + row[0], 'sans' : domains }]
     traefik_config = { 'http' : 
@@ -38,7 +38,7 @@ def hello():
               'certresolver' : 'http'
             },
             'entryPoints' : 'https',
-            'rule' : 'Host(`mailtest.worli.info`)',
+            'rule' : 'HostRegexp(`{host:(autodiscover|autoconfig|webmail|mail|email).+}`)',
             'service' : 'nginx-mailcow@docker',
           }
         }
