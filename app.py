@@ -42,7 +42,9 @@ def hello():
             'service' : 'nginx-mailcow@docker',
           }
         }
-      }
+      },
+      'tcp' : {},
+      'tls' : {}
     }
     response = json.dumps(traefik_config)
         
