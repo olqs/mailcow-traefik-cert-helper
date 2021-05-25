@@ -44,9 +44,9 @@ def hello():
         }
       }
     }
-    response = json.dump(traefik_config)
+    response = json.dumps(traefik_config)
         
-    return Response(response, mimetype='text/yaml')
+    return Response(response, mimetype='text/json')
   except Exception as e:
     print(e)
   finally:
