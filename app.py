@@ -37,7 +37,7 @@ def hello():
               'domains' : tls_domains,
               'certresolver' : 'http'
             },
-            'endpoints' : 'https',
+            'entryPoints' : 'https',
             'rule' : 'Host(`mailtest.worli.info`)',
             'service' : 'nginx-mailcow@docker',
           }
@@ -46,7 +46,7 @@ def hello():
       'tcp' : {},
       'tls' : {}
     }
-    response = json.dumps(traefik_config)
+    response = json.dumps(traefik_config,indent=4)
         
     return Response(response, mimetype='text/json')
   except Exception as e:
