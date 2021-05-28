@@ -21,7 +21,7 @@ def hello():
   try:
     conn = mysql.connect()
     cursor = conn.cursor()
-    cursor.execute("SELECT domain from domain;")
+    cursor.execute("SELECT domain from domain where active=1;")
     rows=cursor.fetchall()
     tls_domains = []
 
