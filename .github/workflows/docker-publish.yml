@@ -19,7 +19,9 @@ on:
 
 env:
   # Use docker.io for Docker Hub if empty
-  REGISTRY: ghcr.io, docker.io
+  REGISTRY: 
+    - ghcr.io
+    - docker.io
   # github.repository as <account>/<repo>
   IMAGE_NAME: ${{ github.repository }}
 
