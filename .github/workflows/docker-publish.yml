@@ -42,7 +42,7 @@ jobs:
         uses: docker/login-action@28218f9b04b4f3f62068d7b6ce6ca5b26e35336c
         with:
           registry: ghcr.io
-          username: ${{ github.actor }}
+          username: olqs
           password: ${{ secrets.CR_PAT }}
 
       # Login against a Docker registry except on PR
@@ -52,8 +52,18 @@ jobs:
         uses: docker/login-action@28218f9b04b4f3f62068d7b6ce6ca5b26e35336c
         with:
           registry: docker.io
-          username: ${{ github.actor }}
+          username: olqs
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
+
+      # Login against a Docker registry except on PR
+      # https://github.com/docker/login-action
+      - name: Log into registry hub.docker.com
+        if: github.event_name != 'pull_request'
+        uses: docker/login-action@28218f9b04b4f3f62068d7b6ce6ca5b26e35336c
+        with:
+          registry: quay.home.olqs.de
+          username: olqs
+          password: ${{ secrets.QUAYHOME_PASSWORD }}
 
       # Extract metadata (tags, labels) for Docker
       # https://github.com/docker/metadata-action
@@ -73,5 +83,6 @@ jobs:
           tags: |
             ${{ steps.meta.outputs.tags }}
             ghcr.io/${{ env.IMAGE_NAME }}:latest
+            quay.home.olqs.de/${{ env.IMAGE_NAME }}:latest
             ${{ env.IMAGE_NAME }}:latest
           labels: ${{ steps.meta.outputs.labels }}
