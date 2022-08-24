@@ -37,7 +37,7 @@ def hello():
               'domains' : tls_domains,
               'certresolver' : 'http'
             },
-            'entryPoints' : 'https',
+            'entryPoints' : [ 'https' ],
             'rule' : 'HostRegexp(`{host:(autodiscover|autoconfig|webmail|mail|email).+}`)',
             'service' : 'nginx-mailcow@docker',
           }
