@@ -16,10 +16,10 @@ The complete configuration is handled with environment variables
   * MYSQL_DATABASE_PASSWORD default mailcow
 * Traefik Configuration
   * TRAEFIK_ROUTER default nginx-mailcow-secure
+  * TRAEFIK_CERTRESOLVER default http
+  * TRAEFIK_HTTPS_ENTRYPOINT default https
+  * TRAEFIK_MAILCOW_SERVICE default nginx-mailcow@docker
 
 ## TODO
 Implement environment variables for following traefik configurations:
 * subdomains which are generated, currently: "mail", "imap", "smtp", "pop3", "autodiscover", "autoconfig", "webmail", "email"
-* name of traefik tls entrypoint, currently: https
-* name of traefik certresolver, currently: http
-* name of traefik mailcow service, currently: nginx-mailcow@docker

@@ -13,6 +13,9 @@ app.config['MYSQL_DATABASE_DB'] = os.environ.get("MYSQL_DATABASE_DB", default='m
 app.config['MYSQL_DATABASE_HOST'] = os.environ.get("MYSQL_DATABASE_HOST", default='mysql-mailcow')
 
 TRAEFIK_ROUTER = os.environ.get("TRAEFIK_ROUTER", default="nginx-mailcow-secure")
+TRAEFIK_CERTRESOLVER = os.environ.get("TRAEFIK_CERTRESOLVER", default="http")
+TRAEFIK_HTTPS_ENTRYPOINT = os.environ.get("TRAEFIK_HTTPS_ENTRYPOINT", default="https")
+TRAEFIK_MAILCOW_SERVICE = os.environ.get("TRAEFIK_MAILCOW_SERVICE", default="nginx-mailcow@docker")
 
 mysql.init_app(app)
 
@@ -35,11 +38,11 @@ def hello():
           { 'tls' : 
             { 
               'domains' : tls_domains,
-              'certresolver' : 'http'
+              'certresolver' : TRAEFIK_CERTRESOLVER
             },
-            'entryPoints' : [ 'https' ],
+            'entryPoints' : [ TRAEFIK_HTTPS_ENTRYPOINT ],
             'rule' : 'HostRegexp(`{host:(autodiscover|autoconfig|webmail|mail|email).+}`)',
-            'service' : 'nginx-mailcow@docker',
+            'service' : nginx-mailcow@docker
           }
         }
       }
