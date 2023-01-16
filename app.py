@@ -42,7 +42,7 @@ def hello():
             },
             'entryPoints' : [ TRAEFIK_HTTPS_ENTRYPOINT ],
             'rule' : 'HostRegexp(`{host:(autodiscover|autoconfig|webmail|mail|email).+}`)',
-            'service' : nginx-mailcow@docker
+            'service' : TRAEFIK_MAILCOW_SERVICE
           }
         }
       }
