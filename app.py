@@ -1,5 +1,5 @@
 from flask import Flask,Response
-from flaskext.mysql import MySQL
+from flask_mysqldb import MySQL
 import json
 import os
 
