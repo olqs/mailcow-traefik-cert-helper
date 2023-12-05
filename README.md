@@ -9,11 +9,11 @@ This app/container is used in the german howtos
 The complete configuration is handled with environment variables
 
 * Database Settings
-  * MYSQL_DATABASE_HOST default mysql-mailcow
-  * MYSQL_DATABASE_PORT default 3306
-  * MYSQL_DATABASE_DB default mailcow
-  * MYSQL_DATABASE_USER default mailcow
-  * MYSQL_DATABASE_PASSWORD default mailcow
+  * MYSQL_HOST default mysql-mailcow
+  * MYSQL_PORT default 3306
+  * MYSQL_DB default mailcow
+  * MYSQL_USER default mailcow
+  * MYSQL_PASSWORD default mailcow
 * Traefik Configuration
   * TRAEFIK_ROUTER default nginx-mailcow-secure
   * TRAEFIK_CERTRESOLVER default http
